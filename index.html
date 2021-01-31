@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>bihdini</title>
+    
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .row {
+            margin-top: 6%;
+        }
+        .logo {
+            margin-bottom: 50px;
+        }
+        .logo .behdini {
+            font-size: 80px;
+            font-weight: bold;
+        }
+        .logo .english {
+            font-size: 20px;
+            font-weight: bold;
+            color: #cccccc;
+        }
+        .btn {
+            margin: 5% 0 6% 0;
+        }
+        hr {
+            border-color: #e4e4e4;
+            margin: 5px 0px 5px 0px;
+        }
+        h3 {
+            color: #999999;
+            margin-right: 50px;
+        }
+        h1, h3 {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div class="text-center logo">
+            <div class="behdini text-info ">وەرگێران</div>
+            <div class="english">Translation</div>
+        </div>
+        <div class="col-lg-4 col-md-3"></div>
+        <div class="col-lg-4 col-md-6 text-center">
+            <input type="text" id="search-txt" class="form-control input-lg" onkeyup="enterkey();">
+            <input type="button" value="Search" class="btn btn-lg btn-primary" onclick="search(); return false;">
+            <hr><hr>
+            <div id="result-txt"></div>
+        </div>
+        <div class="col-lg-4 col-md-3"></div>
+    </div>
+</body>
+
+<script src="./js/jquery-3.4.1.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./json/language.json"></script>
+<script>
+    function enterkey() {
+        if (window.event.keyCode == 13) {
+             search();
+        }
+    }
+    
+    function search() {
+        $('#result-txt').html('');
+        
+        var txt = $('#search-txt').val().trim().toLowerCase();
+        
+        if(txt != '' && txt != null) {
+            var data = JSON.parse(JSON.stringify(Params));
+            $.each(data.language, function(index, item){                        
+                if (txt == (item.english).toLowerCase() || txt == item.behdini) {                            
+                    $('#result-txt').html('<h3>' + item.english + '</h3> <h1>' + item.behdini + '</h1>');
+                    return false;
+                }
+            });
+        }
+    }
+</script>
+</html>
