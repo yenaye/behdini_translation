@@ -33,12 +33,11 @@
             border-color: #e4e4e4;
             margin: 5px 0px 5px 0px;
         }
-        h3 {
+        h4 {
             color: #999999;
-            margin-right: 50px;
+            margin-top: 30px;
         }
-        h1, h3 {
-            display: inline-block;
+        h2, h4 {
             margin-bottom: 20px;
         }
     </style>
@@ -54,7 +53,7 @@
             <input type="text" id="search-txt" class="form-control input-lg" onkeyup="enterkey();">
             <input type="button" value="Search" class="btn btn-lg btn-primary" onclick="search(); return false;">
             <hr><hr>
-            <div id="result-txt"></div>
+            <div id="result-txt" class="col-lg-12"></div>
         </div>
         <div class="col-lg-4 col-md-3"></div>
     </div>
@@ -78,9 +77,8 @@
         if(txt != '' && txt != null) {
             var data = JSON.parse(JSON.stringify(Params));
             $.each(data.language, function(index, item){                        
-                if (txt == (item.english).toLowerCase() || txt == item.behdini) {                            
-                    $('#result-txt').html('<h3>' + item.english + '</h3> <h1>' + item.behdini + '</h1>');
-                    return false;
+                if ((item.english).toLowerCase().indexOf(txt) > -1  || (item.behdini).indexOf(txt) > -1) {                            
+                    $('#result-txt').append('<h4 class="col-lg-6">' + item.english + '</h4> <h2 class="col-lg-6">' + item.behdini + '</h2> <hr class="col-lg-12">');
                 }
             });
         }
